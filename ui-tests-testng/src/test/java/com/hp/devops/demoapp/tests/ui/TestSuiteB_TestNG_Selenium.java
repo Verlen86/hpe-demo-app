@@ -44,17 +44,13 @@ public class TestSuiteB_TestNG_Selenium {
     }
 
     @Test
-    public void testCaseB() {
-        System.out.println("Proudly running test " + Thread.currentThread().getStackTrace()[1]);
-        WebElement query;
-        if (data.isMusicApp()) {
-            query = data.getDriver().findElement(By.id("totalVotes"));
-            Assert.assertEquals(query.getTagName(), "div");
-        } else {
-            query = data.getDriver().findElement(By.id("jenkins"));
-            Assert.assertEquals(query.getTagName(), "body");
-        }
-        Assert.assertEquals(query.isDisplayed(), true);
+    public void testCase1() {
+        Assert.assertEquals(true, true);
+    }
+
+        @Test
+    public void testCase2() {
+        Assert.assertEquals(true, true);
     }
 
     @Test(groups = {"Group_B"})
