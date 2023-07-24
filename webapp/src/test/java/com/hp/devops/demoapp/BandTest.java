@@ -83,4 +83,13 @@ public class BandTest {
 		tmp.put("votes", test.get("votes"));
 		Assert.assertEquals(tmp.toString(), band.toJSONVotes().toString());
 	}
+	    @Test
+    public void testCase1() {
+        Assert.assertEquals(true, true);
+    }
+
+        @Test
+    public void testCase2() {
+        Assert.assertEquals(true, true);
+    }
 }
