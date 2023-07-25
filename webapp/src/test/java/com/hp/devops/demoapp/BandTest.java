@@ -99,6 +99,18 @@ public class BandTest {
 
         @Test
     public void test_2874897485() {
+	             try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Performing a loop with a large number of iterations to add more time
+        int iterations = 10000000;
+        long sum = 0;
+        for (int i = 0; i < iterations; i++) {
+            sum += i;
+        }
         Assert.assertEquals(true, true);
     }
         @Test
