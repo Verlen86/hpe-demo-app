@@ -99,19 +99,39 @@ public class BandTest {
 
         @Test
     public void test_2874897485() {
-	try {
-            Thread.sleep(30000);
+        // Generate a large list of integers
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < 1000000; i++) {
+            numbers.add(i);
+        }
+
+        // Perform some extensive calculations on the list
+        long sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
+
+        // Add an artificial delay of 5 seconds using Thread.sleep()
+        try {
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
-        // Performing a loop with a large number of iterations to add more time
-        int iterations = 1000000000;
-        long sum = 0;
-        for (int i = 0; i < iterations; i++) {
-            sum += i;
+
+        // Simulate more complex operations
+        // For example, generating a large report or processing a large dataset
+        for (int i = 0; i < 10000; i++) {
+            // Simulate some processing here
         }
-        Assert.assertEquals(true, true);
+
+        // Perform more calculations on the list
+        long product = 1;
+        for (int num : numbers) {
+            product *= num;
+        }
+
+        // Assert statement
+        Assert.assertEquals(sum, product);
     }
         @Test
     public void test_7672329791() {
