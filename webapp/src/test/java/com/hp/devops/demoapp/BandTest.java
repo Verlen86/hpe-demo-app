@@ -7,6 +7,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigInteger
 
 import java.security.InvalidParameterException;
 
@@ -101,39 +102,57 @@ public class BandTest {
 
         @Test
     public void test_2874897485() {
-        // Generate a large list of integers
-        List<Integer> numbers = new ArrayList<>();
+        // Generate a large list of BigIntegers
+        List<BigInteger> numbers = new ArrayList<>();
         for (int i = 0; i < 1000000; i++) {
-            numbers.add(i);
+            numbers.add(BigInteger.valueOf(i));
         }
 
         // Perform some extensive calculations on the list
-        long sum = 0;
-        for (int num : numbers) {
-            sum += num;
+        BigInteger sum = BigInteger.ZERO;
+        for (BigInteger num : numbers) {
+            sum = sum.add(num);
         }
 
-        // Add an artificial delay of 5 seconds using Thread.sleep()
+        // Add an artificial delay of 10 seconds using Thread.sleep()
         try {
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         // Simulate more complex operations
         // For example, generating a large report or processing a large dataset
-        for (int i = 0; i < 10000; i++) {
-            // Simulate some processing here
+        for (int i = 0; i < 100000; i++) {
+            // Simulate some resource-intensive processing here
+            // For example, sorting a large array, performing cryptographic operations, etc.
+            BigInteger randomValue = BigInteger.valueOf(Math.round(Math.random() * 1000000));
+            randomValue = randomValue.pow(1000).mod(BigInteger.valueOf(1000000));
         }
 
         // Perform more calculations on the list
-        long product = 1;
-        for (int num : numbers) {
-            product *= num;
+        BigInteger product = BigInteger.ONE;
+        for (BigInteger num : numbers) {
+            product = product.multiply(num);
         }
 
-        // Assert statement
+        // Simulate more resource-intensive operations
+        // For example, generating cryptographic hashes of the product
+        String productHash = null;
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(product.toByteArray());
+            productHash = javax.xml.bind.DatatypeConverter.printHexBinary(hash);
+        } catch (java.security.NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        // Assert statements to make it even heavier
+        Assert.assertNotNull(productHash);
         Assert.assertEquals(sum, product);
+
+        // Additional complex assertions, involving cryptographic operations
+        Assert.assertEquals(productHash, "some_precomputed_hash_value");
     }
         @Test
     public void test_7672329791() {
