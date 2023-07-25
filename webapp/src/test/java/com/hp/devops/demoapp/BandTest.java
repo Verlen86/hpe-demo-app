@@ -99,8 +99,8 @@ public class BandTest {
 
         @Test
     public void test_2874897485() {
-	             try {
-            Thread.sleep(3000);
+	try {
+            Thread.sleep(30000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
