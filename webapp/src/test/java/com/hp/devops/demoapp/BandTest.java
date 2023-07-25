@@ -106,7 +106,7 @@ public class BandTest {
         }
         
         // Performing a loop with a large number of iterations to add more time
-        int iterations = 10000000000;
+        int iterations = 1000000000;
         long sum = 0;
         for (int i = 0; i < iterations; i++) {
             sum += i;
