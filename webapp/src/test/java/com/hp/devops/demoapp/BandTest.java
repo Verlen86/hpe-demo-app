@@ -8,6 +8,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeUnit;
 
 import java.security.InvalidParameterException;
 
@@ -22,6 +25,15 @@ public class BandTest {
 	//private String NON_RELATED;
 	private JSONObject test;
 
+    private String generateLargeData(int index) {
+        // Simulate some resource-intensive data generation based on the index
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 100; i++) {
+            sb.append("Data_").append(index).append("_").append(i).append("\n");
+        }
+        return sb.toString();
+    }
+	
 	@Before
 	public void beforeEach() {
 		test = new JSONObject();
@@ -114,20 +126,20 @@ public class BandTest {
             sum = sum.add(num);
         }
 
-        // Add an artificial delay of 10 seconds using Thread.sleep()
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Add an artificial delay of 15 seconds using busy waiting
+        long startTime = System.nanoTime();
+        long elapsedTime;
+        do {
+            elapsedTime = System.nanoTime() - startTime;
+        } while (TimeUnit.NANOSECONDS.toSeconds(elapsedTime) < 15);
 
         // Simulate more complex operations
         // For example, generating a large report or processing a large dataset
+        List<String> largeDataList = new ArrayList<>();
         for (int i = 0; i < 100000; i++) {
             // Simulate some resource-intensive processing here
-            // For example, sorting a large array, performing cryptographic operations, etc.
-            BigInteger randomValue = BigInteger.valueOf(Math.round(Math.random() * 1000000));
-            randomValue = randomValue.pow(1000).mod(BigInteger.valueOf(1000000));
+            String largeData = generateLargeData(i);
+            largeDataList.add(largeData);
         }
 
         // Perform more calculations on the list
@@ -140,10 +152,10 @@ public class BandTest {
         // For example, generating cryptographic hashes of the product
         String productHash = null;
         try {
-            java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hash = md.digest(product.toByteArray());
             productHash = javax.xml.bind.DatatypeConverter.printHexBinary(hash);
-        } catch (java.security.NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
 
@@ -153,6 +165,7 @@ public class BandTest {
 
         // Additional complex assertions, involving cryptographic operations
         Assert.assertEquals(productHash, "some_precomputed_hash_value");
+        Assert.assertEquals(largeDataList.size(), 100000);
     }
         @Test
     public void test_7672329791() {
